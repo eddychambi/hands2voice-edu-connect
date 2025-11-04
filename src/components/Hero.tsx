@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
@@ -25,13 +26,16 @@ const Hero = () => {
                 <Download className="mr-2 h-5 w-5" />
                 Descargar Ahora
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
-              >
-                Conocer Más
-              </Button>
+              <Link to="/auth">
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto w-full"
+                >
+                  <LogIn className="mr-2 h-5 w-5" />
+                  Iniciar Sesión
+                </Button>
+              </Link>
             </div>
           </div>
           
