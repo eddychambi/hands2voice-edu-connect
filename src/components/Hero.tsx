@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Download, LogIn } from "lucide-react";
+import { Download, LogIn, LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
+import { useAuth } from "@/hooks/useAuth";
 
 const Hero = () => {
+  const { user, signOut } = useAuth();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
       <div className="absolute inset-0 bg-black/20" />
@@ -26,16 +28,34 @@ const Hero = () => {
                 <Download className="mr-2 h-5 w-5" />
                 Descargar Ahora
               </Button>
-              <Link to="/auth">
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto w-full"
-                >
-                  <LogIn className="mr-2 h-5 w-5" />
-                  Iniciar Sesión
-                </Button>
-              </Link>
+              {user ? (
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
+                    <User className="h-5 w-5" />
+                    <span className="text-lg">{user.email}</span>
+                  </div>
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    onClick={signOut}
+                    className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
+                  >
+                    <LogOut className="mr-2 h-5 w-5" />
+                    Cerrar Sesión
+                  </Button>
+                </div>
+              ) : (
+                <Link to="/auth">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto w-full"
+                  >
+                    <LogIn className="mr-2 h-5 w-5" />
+                    Iniciar Sesión
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
           
